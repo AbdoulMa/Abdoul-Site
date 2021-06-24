@@ -1,11 +1,40 @@
 {
   "articles": [
     {
-      "path": "index.html",
-      "title": "My Blog",
+      "path": "about.html",
+      "title": "About this blog",
+      "description": "Some additional details about the blog",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-06-18T21:29:40+02:00"
+      "last_modified": "2021-06-24T22:00:06+02:00"
+    },
+    {
+      "path": "cv.html",
+      "title": "CV",
+      "description": "A new article created using the Distill format.\n",
+      "author": [
+        {
+          "name": "Nora Jones",
+          "url": "https://example.com/norajones"
+        }
+      ],
+      "date": "`r Sys.Date()`",
+      "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill for R Markdown at https://rstudio.github.io/distill.\n\n\n\n",
+      "last_modified": "2021-06-24T22:00:06+02:00"
+    },
+    {
+      "path": "index.html",
+      "title": "Abdoul Blog",
+      "author": [],
+      "contents": "\n Welcome to my new website.\n\n\n\n",
+      "last_modified": "2021-06-24T22:01:24+02:00"
+    },
+    {
+      "path": "postcard.html",
+      "title": "Abdoul ISSA BIDA",
+      "author": [],
+      "contents": "\n\n          \n          \n          Abdoul ISSA BIDA\n          \n          \n          Home\n          About\n          CV\n          \n          \n          \n          ☰\n          \n          \n      \n        \n          \n            Abdoul ISSA BIDA\n          \n          \n            \n              I am a classically trained data scientist living in the San Francisco Bay Area. Currently I work on the Oculus team at Facebook. I love talking about baseball, true crime podcasts, and causal inference.\n            \n            \n              I am a classically trained data scientist living in the San Francisco Bay Area. Currently I work on the Oculus team at Facebook. I love talking about baseball, true crime podcasts, and causal inference.\n            \n          \n\n          \n            \n              \n                  \n                    \n                      Twitter\n                    \n                  \n                \n                                \n                  \n                    \n                      GitHub\n                    \n                  \n                \n                                \n                  \n                    \n                      Email\n                    \n                  \n                \n                              \n          \n\n          \n            \n              \n                                \n                  \n                    Twitter\n                  \n                \n                                \n                  \n                    GitHub\n                  \n                \n                                \n                  \n                    Email\n                  \n                \n                              \n            \n          \n        \n      \n    \n\n    \n    \n    ",
+      "last_modified": "2021-06-24T22:00:07+02:00"
     }
   ],
   "collections": ["posts/posts.json"]

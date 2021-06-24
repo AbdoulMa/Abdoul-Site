@@ -1,5 +1,11 @@
 ---
-title: "My Blog"
+title: "Abdoul Blog"
 site: distill::distill_website
 listing: posts
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+<br> <br>
+Welcome to my *new* website. 
