@@ -86,20 +86,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Abdoul ISSA BIDA: Abdoul Blog</title>
+  <title>ABDOUL BLOG: Abdoul Blog</title>
 
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Abdoul ISSA BIDA: Abdoul Blog"/>
+  <meta property="og:title" content="ABDOUL BLOG: Abdoul Blog"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Abdoul ISSA BIDA"/>
+  <meta property="og:site_name" content="ABDOUL BLOG"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Abdoul ISSA BIDA: Abdoul Blog"/>
+  <meta property="twitter:title" content="ABDOUL BLOG: Abdoul Blog"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
@@ -2062,7 +2062,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /* Change appearance of headers */
   h1, h2, h3, h4, h5 {
-    font-family: 'Fira Mono', sans-serif;
+    font-family: 'Lato Black', sans-serif;
     color: color: #383838;
   }
 
@@ -2122,7 +2122,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <header class="header header--fixed" role="banner">
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
-<a href="index.html" class="title">Abdoul ISSA BIDA</a>
+<a class="logo">
+<img src="images/logo.png" alt="Logo"/>
+</a>
+<a href="index.html" class="title">ABDOUL BLOG</a>
 <input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
@@ -2131,6 +2134,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="cv.html">CV</a>
 <a href="https://github.com/AbdoulMa">
 <i class="fab fa-github" aria-hidden="true"></i>
+</a>
+<a href="https://twitter/issa_madjid">
+<i class="fab fa-twitter" aria-hidden="true"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
@@ -2271,24 +2277,27 @@ function init_posts_list() {
 
 
 
-<div class="posts-container posts-apply-limit l-page">
+<div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <h1 class="posts-list-caption" data-caption="Abdoul Blog">Abdoul Blog</h1>
-<a href="posts/2021-06-18-hello-distill/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<a href="posts/2021-07-08-my-life-in-months/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["waffle","tidyverse"]}</script>
 <div class="metadata">
-<div class="publishedDate">June 18, 2021</div>
+<div class="publishedDate">July 7, 2021</div>
 <div class="dt-authors">
 <div class="dt-author">Abdoul ISSA BIDA</div>
 </div>
 </div>
 <div class="thumbnail">
-<img/>
+<img src="posts/2021-07-08-my-life-in-months/preview.png"/>
 </div>
 <div class="description">
-<h2>Hello Distill!</h2>
-<div class="dt-tags"></div>
-<p>A short description of the post.</p>
+<h2>My Life in Months</h2>
+<div class="dt-tags">
+<div class="dt-tag">waffle</div>
+<div class="dt-tag">tidyverse</div>
+</div>
+<p>A waffle to describe my life in months.</p>
 </div>
 </a>
 <a href="posts/welcome/" class="post-preview">
@@ -2310,6 +2319,25 @@ reading what we have to say!</p>
 </div>
 </a>
 </div>
+<div class="posts-sidebar">
+<div class="sidebar-section categories">
+<h3>Categories</h3>
+<ul>
+<li>
+<a href="#category:articles">articles</a>
+<span class="category-count">(2)</span>
+</li>
+<li>
+<a href="#category:tidyverse">tidyverse</a>
+<span class="category-count">(1)</span>
+</li>
+<li>
+<a href="#category:waffle">waffle</a>
+<span class="category-count">(1)</span>
+</li>
+</ul>
+</div>
+</div>
 <div class="posts-more">
 <a href="#">More articles &raquo;</a>
 </div>
@@ -2325,7 +2353,6 @@ reading what we have to say!</p>
 
 
 <div class="d-article">
-<p><br> <br> Welcome to my <em>new</em> website.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

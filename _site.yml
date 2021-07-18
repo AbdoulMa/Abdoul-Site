@@ -1,9 +1,11 @@
 name: "Abdoul Site"
-title: "Abdoul ISSA BIDA"
+title: "ABDOUL BLOG"
 description: |
   My Blog
 output_dir: "_site"
 navbar:
+  logo:
+    image: images/logo.png
   right:
     - text: "Home"
       href: index.html
@@ -13,6 +15,8 @@ navbar:
       href: cv.html
     - icon: fab fa-github
       href: https://github.com/AbdoulMa  
+    - icon: fab fa-twitter
+      href: https://twitter/issa_madjid
 
 output: 
   distill::distill_article:
