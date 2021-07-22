@@ -16,7 +16,7 @@ navbar:
     - icon: fab fa-github
       href: https://github.com/AbdoulMa  
     - icon: fab fa-twitter
-      href: https://twitter/issa_madjid
+      href: https://twitter.com/issa_madjid
 
 output: 
   distill::distill_article:
