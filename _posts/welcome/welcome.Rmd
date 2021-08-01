@@ -35,14 +35,12 @@ As, my passion keep growing, I started learning R typpically with short tutorial
 
 On May 5th, I make my first submission to the `Tidytuesday` Challenge. I didn't wait for a lot likes but what happened was just magical. 
 
+<blockquote>
 ```{r twitter_status}
 optspars <- list(align="center")
 twitterwidget('1389976276765716488', optspars)
 ```
+</blockquote>
 
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">
-<a href="https://mobile.twitter.com/issa_madjid/status/1389976276765716488"> </a>
-</blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 I received a ton of compliments  and advices for a  simple lines plot.
