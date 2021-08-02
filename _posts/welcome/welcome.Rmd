@@ -17,6 +17,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+optspars <- list(align="center")
 library(twitterwidget)
 # Learn more about creating blogs with Distill at:
 # https://rstudio.github.io/distill/blog.html
@@ -28,6 +29,14 @@ Fist of all, I followed essentially some great sport Data Analysts like [Owen Ph
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ha! This is an excerpt from our abstract: <br><br>Our preliminary analysis found that only 2.4% of the images contained a text description entered by the tweet author compared to 84% which were described by default as &quot;Image&quot; 😬<br><br>Full abstract available at <a href="https://t.co/nqn9VFgWkK">https://t.co/nqn9VFgWkK</a></p>&mdash; Silvia Canelón (@spcanelon) <a href="https://twitter.com/spcanelon/status/1375238625437351939?ref_src=twsrc%5Etfw">March 26, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+<blockquote>
+<p>Some Owen Tweets</p>
+```{r}
+twitterwidget('1382764821955895299', optspars)
+```
+-- Owen Pihllips(@owenlhjphillips)
+</blockquote>
+<br>
 And as things progress, I started following people from R Community and particulary those who contribute to the `Tidytuesday` weeekly Data Vizualisation Challenge. 
 
 As, my passion keep growing, I started learning R typpically with short tutorial like the Amazing one [Cédric Scherer](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/?s=09) but also with some `bookdown` particulary the bible  for the beginners and the aspiring data scientists [R for Data Science](https://r4ds.had.co.nz/introduction.html) by **Hadley Wicham** and **Garett Grolemund**.
@@ -36,11 +45,14 @@ As, my passion keep growing, I started learning R typpically with short tutorial
 On May 5th, I make my first submission to the `Tidytuesday` Challenge. I didn't wait for a lot likes but what happened was just magical. 
 
 <blockquote>
+The dataset was about Water Acces Points and come from [WPDX](https://www.waterpointdata.org/). 
+My analysis of the data wasn't the adequate one and my lines plot was even less but  my intention was principally 
+to give birth to a presentable plot with my beginner knowledge. 
+
 ```{r twitter_status}
-optspars <- list(align="center")
 twitterwidget('1389976276765716488', optspars)
 ```
+-- <cite>Abdoul Madjid</cite>
 </blockquote>
 <br>
-
 I received a ton of compliments  and advices for a  simple lines plot.
