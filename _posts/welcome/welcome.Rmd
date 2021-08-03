@@ -29,25 +29,32 @@ Fist of all, I followed essentially some great sport Data Analysts like [Owen Ph
 
 <blockquote>
 <p>Some Owen's Tweets</p>
+<div>
 ```{r}
-twitterwidget('1377974728233734148', optspars, height = 700)
+twitterwidget('1377974728233734148', optspars, height = 650)
 ```
+</div><br>
+
+<div>
+```{r}
+twitterwidget('1405137683467456513', optspars, height = 575)
+```
+</div><br>
 
 -- Owen Pihllips(@owenlhjphillips)
 </blockquote>
-<br><br>
+<br>
 
 And as things progress, I started following people from R Community and particulary those who contribute to the `Tidytuesday` weeekly Data Vizualisation Challenge. 
 
 As, my passion keep growing, I started learning R typpically with short tutorial like the Amazing one [Cédric Scherer](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/?s=09) but also with some `bookdown` particulary the bible  for the beginners and the aspiring data scientists [R for Data Science](https://r4ds.had.co.nz/introduction.html) by **Hadley Wicham** and **Garett Grolemund**.
 
 
-On May 5th, I make my first submission to the `Tidytuesday` Challenge. I didn't wait for a lot likes but what happened was just magical. 
+On May 5th, I make my first submission to the **Tidytuesday** Challenge. I didn't wait for a lot likes but what happened was just magical. 
 
 <blockquote>
 The dataset was about Water Acces Points and come from [WPDX](https://www.waterpointdata.org/). 
-My analysis of the data wasn't the adequate one and my lines plot was even less but  my intention was principally 
-to give birth to a presentable plot with my beginner knowledge. 
+My analysis of the data wasn't the adequate one and my lines plot was even less but  my intention was principally to give birth to a presentable plot with my beginner knowledge. 
 
 ```{r twitter_status}
 twitterwidget('1389976276765716488', optspars, height = 450)
