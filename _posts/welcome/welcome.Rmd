@@ -45,9 +45,9 @@ twitterwidget('1405137683467456513', optspars, height = 575)
 </blockquote>
 <br>
 
-And as things progress, I started following people from R Community and particulary those who contribute to the `Tidytuesday` weeekly Data Vizualisation Challenge. 
+And as things progress, I started following more and more people from R Community and particulary those who contribute to the `Tidytuesday` weeekly Data Vizualisation Challenge. 
 
-As, my passion keep growing, I started learning R typpically with short tutorial like the Amazing one [Cédric Scherer](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/?s=09) but also with some `bookdown` particulary the bible  for the beginners and the aspiring data scientists [R for Data Science](https://r4ds.had.co.nz/introduction.html) by **Hadley Wicham** and **Garett Grolemund**.
+As, my passion keep growing, I started learning R typpically with short tutorial like thoses amazing ones from [Cédric Scherer](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/?s=09) or [Thomas Mock](https://themockup.blog/) but also with some `bookdown` particulary the bible  for the beginners and the aspiring data scientists [R for Data Science](https://r4ds.had.co.nz/introduction.html) by **Hadley Wicham** and **Garett Grolemund**.
 
 
 On May 5th, I make my first submission to the **Tidytuesday** Challenge. I didn't wait for a lot likes but what happened was just magical. 
@@ -62,4 +62,9 @@ twitterwidget('1389976276765716488', optspars, height = 450)
 -- <cite>Abdoul Madjid(@issa_madjid)</cite>
 </blockquote>
 <br>
-I received a ton of compliments  and advices for a  simple lines plot.
+I received a ton of compliments  and advices for a  simple lines plot, what acted like a boost for my little ego. So from an initial post, I have decided despite my professional life schedule : 
+
+- to be a  weekly contributor to the **TidyTuesday Challenge** 
+- to try to progress from the feedbacks I received from the Community
+- and to build a blog with [{distill}](https://rstudio.github.io/distill/) which is used to build scientific and technical writing and native blog with **R Markdown**
+
