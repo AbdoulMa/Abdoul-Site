@@ -49,7 +49,7 @@ font-weight: 600;
 border-style: none;
 }
 
-d-article  p a:hover { 
+d-article p a:hover { 
   border-bottom-color: #E84A5FFF;
   border-bottom-width: 2px;
 }

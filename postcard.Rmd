@@ -14,5 +14,5 @@ output:
 
 I am a rookie fullstack Developer in the Dijon Area, France. 
 I am graduated from University of Burgundy, France with a Master Degree in Databases & Artificial Intelligence.
-Currently I work in the developers Team at Actualis. I love talking about Data Science, Data Wrangling, analyzing and visualizing. 
-I am also interested about Forecasting,Data Modeling, Tennis, Basketball and Foods 🍝 (particulary Empanadas, Pastries & Desserts). 
+Currently I work in the developers Team at [Actualis](https://www.firsteco.fr/). I love talking about Data Science, Data Wrangling, analyzing and visualizing. 
+I am also interested about Forecasting,Data Modeling, Tennis, Basketball and Foods 🍝 (particularly Empanadas, Pastries & Desserts). 
