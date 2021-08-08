@@ -4,7 +4,7 @@ description: |
  
 author:
   - name: Abdoul ISSA BIDA 
-    url: https://example.com/norajones
+    url: https://abdoulblog.netlify.app
 date: 06-18-2021
 preview: preview.png
 categories: 
