@@ -5,6 +5,7 @@ description: |
 author:
   - name: Abdoul ISSA BIDA
     url: https://example.com/norajones
+citation_url : https://rstudio.github.io/distill
 date: 07-08-2021
 output:
   distill::distill_article:
@@ -13,9 +14,9 @@ categories:
   - waffle
   - tidyverse
 preview : preview.png
+bibliography : ../article1.bib
 
 ---
-
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -24,6 +25,11 @@ library(waffle)
 library(ragg)
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
 ```
+
+All those graphics are built using R 4.0.4 [@R-base].
+Sometimes all the information ist not in the body ^[Because it is in the footer].
+When you do that you'll add footnote ^[By adding footnote syntax].
+
 ```{r data_creation}
 life_data <- tibble(
   months = factor(rep(month.abb, 90), levels = month.abb)
@@ -36,6 +42,9 @@ life_data <- tibble(
 life_data
 ```
 
+<aside> 
+this comment is on the side.
+</aside>
 
 ```{r factoring_era}
 life_data <- life_data %>% 
@@ -74,4 +83,6 @@ ggsave("life_in_months.png", device = agg_png(),  width = 15, height = 25, dpi =
 knitr::include_graphics("life_in_months.png")
 ```
 
+## Acknowledgments {.appendix}
+You can recognize people and institutions in acknowledgments.
 
