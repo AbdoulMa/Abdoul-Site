@@ -5,7 +5,7 @@ description: |
 output_dir: "_site"
 navbar:
   logo:
-    image: images/logo.png
+    # image: images/logo.png
   right:
     - text: "Home"
       href: index.html
