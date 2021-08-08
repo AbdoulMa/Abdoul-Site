@@ -1,25 +1,5 @@
 [
   {
-    "path": "posts/2021-07-08-my-life-in-months/",
-    "title": "My Life in Months",
-    "description": "A waffle to describe my life in months.",
-    "author": [
-      {
-        "name": "Abdoul ISSA BIDA",
-        "url": "https://example.com/norajones"
-      }
-    ],
-    "date": "2021-07-08",
-    "categories": [
-      "waffle",
-      "tidyverse"
-    ],
-    "contents": "\nAll those graphics are built using R 4.0.4 (R Core Team 2021). Sometimes all the information ist not in the body.1 When you do that you’ll add footnote.2\n\n\nlife_data <- tibble(\n  months = factor(rep(month.abb, 90), levels = month.abb)\n) %>% \n  slice(5:n()) %>% \n  mutate(\n    age = rep(0:100, each = 12, length.out = n())\n  ) %>% \n  rowid_to_column(\"row_id\")\nlife_data\n\n\n# A tibble: 1,076 × 3\n   row_id months   age\n    <int> <fct>  <int>\n 1      1 May        0\n 2      2 Jun        0\n 3      3 Jul        0\n 4      4 Aug        0\n 5      5 Sep        0\n 6      6 Oct        0\n 7      7 Nov        0\n 8      8 Dec        0\n 9      9 Jan        0\n10     10 Feb        0\n# … with 1,066 more rows\n\n\nthis comment is on the side.\n\n\nlife_data <- life_data %>% \n  mutate(era = fct_inorder(\n    case_when(\n      row_id < 12*10 ~ \"Childhood - Benin\",\n      row_id < 12*17 ~ \"HighSchool - Benin\",\n      row_id < 12*20 ~ \"College - Benin\",\n      row_id < 12*25 ~ \"College - France\",\n      row_id < 12*65 ~ \"Adulting, Working - France\",\n      TRUE  ~ \"Adulting, Retreat - France, Benin\"\n              )\n  ))\n\nlife_data\n\n\n# A tibble: 1,076 × 4\n   row_id months   age era              \n    <int> <fct>  <int> <fct>            \n 1      1 May        0 Childhood - Benin\n 2      2 Jun        0 Childhood - Benin\n 3      3 Jul        0 Childhood - Benin\n 4      4 Aug        0 Childhood - Benin\n 5      5 Sep        0 Childhood - Benin\n 6      6 Oct        0 Childhood - Benin\n 7      7 Nov        0 Childhood - Benin\n 8      8 Dec        0 Childhood - Benin\n 9      9 Jan        0 Childhood - Benin\n10     10 Feb        0 Childhood - Benin\n# … with 1,066 more rows\n\n\n\nlife_months <- life_data %>% \n  count(era) %>% \n  ggplot(aes(fill = era, values = n)) + \n    geom_waffle(color = \"#F7F7F7\", n_rows = 12, size = 1, flip = TRUE) +\n     scale_fill_manual(name = \"\", values = c(\"#EF476F\",\"#FCA311\",\"#FFD166\",\"#0EAD69\",\"#4ECDC4\",\"#118AB2\")) + \n   coord_equal() + \n  theme_void(base_family =\"Lato Medium\") +\n    theme(legend.text = element_text(family = \"American Type Writer\", size = 15),\n        plot.background = element_rect(fill = \"#F7F7F7\", color = \"#F7F7F7\"))\n\n\n\n\n\n\nAcknowledgments\nYou can recognize people and institutions in acknowledgments.\n\n\n\nR Core Team. 2021. R: A Language and Environment for Statistical Computing. Vienna, Austria: R Foundation for Statistical Computing. https://www.R-project.org/.\n\n\nBecause it is in the footer↩︎\nBy adding footnote syntax↩︎\n",
-    "preview": "posts/2021-07-08-my-life-in-months/preview.png",
-    "last_modified": "2021-08-08T18:30:21+02:00",
-    "input_file": "my-life-in-months.knit.md"
-  },
-  {
     "path": "posts/welcome/",
     "title": "Welcome to My Blog",
     "description": {},
@@ -37,6 +17,6 @@
     "contents": "\nI started learning R a couple months ago, because I spend a lot time on Twitter and was always amazed by all the great graphics made with this statistical programming language. First of all, I followed essentially some great sport Data Analysts like Owen Phillips who post great charts about NBA Players & Community Stats.\n\n\nSome Owen’s Tweets\n\n\n\n\n{\"x\":{\"twid\":\"1377974728233734148\",\"pars\":{\"align\":\"center\"}},\"evals\":[],\"jsHooks\":[]}\n\n\n\n\n\n{\"x\":{\"twid\":\"1405137683467456513\",\"pars\":{\"align\":\"center\"}},\"evals\":[],\"jsHooks\":[]}\n\n\n– Owen Pihllips( @owenlhjphillips )\n\n\nAnd as things progress, I started following more and more people from R Community and particularly those who contribute to the Tidytuesday weekly Data Visualization Challenge.\nAs, my passion keeps growing, I started learning R typically with short tutorial like those amazing ones from Cédric Scherer or Thomas Mock but also with some bookdown particularly the bible for the beginners and the aspiring data scientists R for Data Science (Wickham and Grolemund 2017).\nOn May 5, 2020, I made my first contribution for the Tidytuesday Challenge. I wasn’t expecting a lot of likes but what happened was just magical.\n\nThe dataset was about Water Acces Points and come from WPDX. My analysis of the data wasn’t the adequate one and my lines plot was even less, but my intention was principally to give birth to a presentable plot with my beginner knowledge.\n\n\n{\"x\":{\"twid\":\"1389976276765716488\",\"pars\":{\"align\":\"center\"}},\"evals\":[],\"jsHooks\":[]}\n– Abdoul Madjid((issa_madjid?))\n\n I received a ton of compliments and advices for that meme lines plot, what acted like a boost for my little ego 😅. So from that initial post, I have decided, despite my professional life schedule:\nto be a weekly contributor to the TidyTuesday Challenge\nto try to progress from the feedback I received from the Community\nand to build a blog with {distill} which is used to build scientific and technical writing and native blog with R Markdown\n\nSo Here, We go.\n\nAcknowledgement\nA big thank you to all the amazing contributors to the R community.\n\n\n\nWickham, Hadley, and Garrett Grolemund. 2017. R for Data Science: Import, Tidy, Transform, Visualize, and Model Data. 1st ed. Paperback; O’Reilly Media. http://r4ds.had.co.nz/.\n\n\n\n\n",
     "preview": "posts/welcome/preview.png",
     "last_modified": "2021-08-08T19:35:38+02:00",
-    "input_file": "welcome.knit.md"
+    "input_file": {}
   }
 ]
