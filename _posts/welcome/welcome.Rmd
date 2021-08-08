@@ -13,6 +13,7 @@ categories:
 output:
   distill::distill_article:
     self_contained: false
+bibliography : ../articles.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -50,7 +51,7 @@ twitterwidget('1405137683467456513', optspars, height = 575)
 
 And as things progress, I started following more and more people from R Community and particularly those who contribute to the `Tidytuesday` weekly Data Visualization Challenge.
 
-As, my passion keeps growing, I started learning R typically with short tutorial like those amazing ones from [Cédric Scherer](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/?s=09) or [Thomas Mock](https://themockup.blog/) but also with some `bookdown` particularly the bible  for the beginners and the aspiring data scientists [R for Data Science](https://r4ds.had.co.nz/introduction.html) by **Hadley Wicham** and **Garett Grolemund**.
+As, my passion keeps growing, I started learning R typically with short tutorial like those amazing ones from [Cédric Scherer](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/?s=09) or [Thomas Mock](https://themockup.blog/) but also with some `bookdown` particularly the bible  for the beginners and the aspiring data scientists R for Data Science [@Wickham2017R].
 
 
 On May 5, 2020, I made my first contribution for the **Tidytuesday** Challenge. I wasn't expecting a lot of likes but what happened was just magical.
@@ -73,4 +74,7 @@ I received a ton of compliments and advices for that meme lines plot, what acted
 
 
 
-<div style = "text-align:center;font-weight:bold; font-size : 2.5rem !important;">So Here, We go. </div>
+<div style = "margin-top: 20px;text-align:center;font-weight:bold; font-size : 2.5rem !important;">So Here, We go. </div>
+
+## Acknowledgement {.appendix}
+A big thank you to all the amazing contributors to the R community.

@@ -14,7 +14,7 @@ categories:
   - waffle
   - tidyverse
 preview : preview.png
-bibliography : ../article1.bib
+bibliography : ../articles.bib
 
 ---
 
