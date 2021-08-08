@@ -77,4 +77,4 @@ I received a ton of compliments and advices for that meme lines plot, what acted
 <div style = "margin-top: 20px;text-align:center;font-weight:bold; font-size : 2.5rem !important;">So Here, We go. </div>
 
 ## Acknowledgement {.appendix}
-A big thank you to all the amazing contributors to the R community.
+A big thank to all the amazing contributors to the R community.
