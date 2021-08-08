@@ -45,7 +45,7 @@ twitterwidget('1405137683467456513', optspars, height = 575)
 ```
 </div><br>
 
--- Owen Pihllips(@owenlhjphillips)
+-- Owen Pihllips(\@owenlhjphillips)
 </blockquote>
 <br>
 
@@ -63,7 +63,7 @@ My analysis of the data wasn't the adequate one and my lines plot was even less,
 ```{r twitter_status}
 twitterwidget('1389976276765716488', optspars, height = 450)
 ```
--- <cite>Abdoul Madjid(@issa_madjid)</cite>
+-- <cite>Abdoul Madjid(\@issa_madjid)</cite>
 </blockquote>
 <br>
 I received a ton of compliments and advices for that meme lines plot, what acted like a boost for my little ego <span style ="font-size: 1.25rem">`r emo::ji("sweat_smile")`</span>. So from that initial post, I have decided, despite my professional life schedule:
