@@ -12,7 +12,7 @@ navbar:
     - text: "About"
       href: postcard.html # about.html
     - text: "CV"
-      href: Resume/resume.html
+      href: resume.html
     - icon: fab fa-github
       href: https://github.com/AbdoulMa  
     - icon: fab fa-twitter
