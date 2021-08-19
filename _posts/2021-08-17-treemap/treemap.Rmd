@@ -1,0 +1,220 @@
+---
+title: "Tired of Pie Charts !? Let's make a Tree Map."
+description: |
+  Tree maps are useful alternatives for the presentation of proportions.
+author:
+  - name: Abdoul ISSA BIDA
+date: 08-17-2021
+preview: preview.png
+categories: 
+  - R
+  - Tidyverse 
+  - Tree Map
+output:
+  distill::distill_article:
+    self_contained: false
+citation_url: https://abdoulblog.netlify.app
+bibliography: ../articles.bib
+---
+
+
+```{r setup, include=FALSE}
+library(kableExtra)
+library(tidyverse)
+library(treemapify) # For geom_treemap and friends
+library(paletteer) # For color palette 
+library(ggtext) # For customize text (used in this script with element_markdown)
+library(ragg) # For the device for save the plot
+knitr::opts_chunk$set(echo = T)
+```
+
+## Data Reading
+For this first blog post, we are going to use Tidytuesday[@tidytuesday] Week 34 Dataset. 
+
+The data comes from [SpeechInteraction.org](SpeechInteraction.org/TNG/) and was shared by [Sara Stoudt](https://twitter.com/sastoudt).
+
+It is the records of **Star Trek** characters interactions with **Voice User Interfaces(VUIs)**  such as Apple Siri, Google Assistant, Amazon Alexa. 
+
+A complete description of the dataset is available at : [https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-08-17](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-08-17).
+
+First of all, let's import `tidyverse` package : 
+
+```{r, eval=F}
+library(tidyverse) # Import ggplot2 and friends for data wrangling 
+```
+
+Secondly, let's read the data : 
+
+```{r data_reading}
+computer <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-17/computer.csv')
+```
+
+Here is what the data looks like. 
+
+```{r, eval=F}
+head(computer, 2)
+```
+
+<div style ="width:100%; display:block; overflow:auto;">
+
+```{r, echo = F}
+knitr::kable(head(computer, 2), format = "html")
+```
+
+</div>
+
+
+## Data Wrangling 
+
+We won't spend a lot of time  wrangling data to try to bring out some specific pattern. 
+We are going to simply count the characters which interact the more with VUIs. 
+
+```{r}
+characters <- computer %>% 
+  count(char, sort= T) %>%   
+  # Categorize  the  characters that will be useful for our visualization
+  mutate(char = factor(char)) 
+```
+
+Let's look at, the 6 characters which interact the most with VUIs. 
+
+```{r, eval=F}
+head(characters)
+```
+
+
+
+```{r, echo = F, fig.align='center'}
+knitr::kable(head(characters)) %>% 
+  kable_styling(position = "center")
+```
+
+The results are logical because ***Geordi*** is an engineer in **The Star Trek Saga**.
+
+## Graphic 
+
+For this section, we need to import some extra libraries: 
+
+- treemapify[@treemapify]
+- paletteer[@paletteer]
+- ggtext
+- ragg
+
+```{r, eval=F}
+library(treemapify) # For geom_treemap and friends
+library(paletteer) # For color palette 
+library(ggtext) # For customize text (used in this script with element_markdown)
+library(ragg) # For the device for save the plot
+```
+
+### So why a Tree Map, instead of a Pie chart for proportions Visualization? 
+
+Pie charts are generally really cool to look at. But in some cases, like ours, there is too many individual data, and they are so close in magnitude that the message that we try to spread with a pie chart is biased.
+
+In those cases, I use Tree Maps, which are pretty useful for the presentation of proportions.
+
+<aside>
+A tree map shows the attribute of a cardinally scaled variable as nested rectangles. The size and order of the rectangles are  calculated so that, with preset outer dimensions, the large rectangle is completely filled and the areas of the individual rectangles correspond to the size of the variables.[@dataVizRahlf2017]
+</aside>
+
+```{r}
+characters %>%
+  ggplot(aes(fill = char,area = n)) + 
+  geom_treemap(color = "black", size = 1) + 
+  # We won't use legends because we 'ill annotate each square 
+  # with the character name and the number of times it interacted 
+  theme(legend.position = "none") 
+```
+
+At this step, we just mapped, each area with the number of interactions of a character and filled the area with the character.
+
+Next step, let's annotate each area with the name of the matching character using the function `geom_treemap_text` of `treemapify` package. 
+
+This function takes several arguments especially: 
+
+- `family` for the font family
+- `fontface` for the font face 
+- `colour` for the font color  
+- `place` for the place inside the box where the text is placed. 
+- `grow` which is is very important, because if `TRUE`, the text will be grown as well as shrunk to fill the box.
+
+
+```{r, message=FALSE, fig.align='center'}
+characters %>%
+  # Add in the mapping, label
+  ggplot(aes(fill = char,area = n,label = glue::glue(" {char} \n ({n})"))) + 
+  geom_treemap(color = "black", size = 1) + 
+  geom_treemap_text(family = "Lato Black",fontface = "italic",
+                    colour = "white", place = "centre",
+                    grow = TRUE) + 
+  theme(legend.position = "none") 
+```
+
+It began to look pretty good, but let's customize it a little bit. 
+
+For that, I will fill the areas with a different color palette. The challenge would be to find a color palette with more 25 colors. 
+
+Fortunately for us, `colorRampPalette()` R function provide a tools to interpolate a set of given colors to create new color palettes. 
+
+Cédric Scherer published a trick about that. 
+
+<blockquote>
+
+<div>
+```{r, echo = F}
+twitterwidget::twitterwidget('1426157378454556672', list(align = 'center'), height = 650)
+```
+</div>
+
+</blockquote>
+<br>
+
+Let's use it. 
+For color palette, I choose `Prism` from `rcartoclor` package. We can also access this palette within `paletteer` package. 
+
+```{r, fig.align='center', out.width='100%'}
+paletteer_d("rcartocolor::Prism",12) %>% 
+  # We visualize the colors with show_col from scales pkg 
+  scales::show_col()
+```
+
+Now, we extend it. 
+
+```{r, fig.align='center', out.width='100%'}
+extended_palette <- colorRampPalette(paletteer_d("rcartocolor::Prism",12)) 
+# Let's visualize 40 interpolated colors et
+extended_palette(49) %>% 
+  scales::show_col(cex_label = .55, ncol = 7)
+```
+
+Finally we can use it, and set a little bit more the theme. 
+
+```{r}
+plot <- characters %>%
+  ggplot(aes(fill = char,area = n, label = glue::glue(" {char} \n ({n})"))) + 
+  geom_treemap(color = "black", size = 1) + 
+  geom_treemap_text(family = "Lato Black",fontface = "italic", colour = "white", place = "centre",
+                    grow = TRUE) + 
+  labs(title = "Which characters interact the most with VUIs\n in the Star Trek Saga?",
+       caption = "Data from ***SpeechInteraction.com*** and shared by Sara Stoudt.<br/>
+       Tidytuesday Week-34 2021.") + 
+  scale_fill_manual(values = extended_palette(nrow(characters))) + 
+  theme(text =element_text(family = "Lato"),
+        plot.background = element_rect(fill = "grey95"),
+        panel.spacing = unit(2.5, units = "cm"),
+        plot.title = element_text(family = "Lato Black",size = rel(2.5), hjust = .5, margin = margin(t = 15,b = 10)),
+        plot.caption = element_markdown(color = "black", size = rel(1.2), margin = margin(t = 20,b = 10)),
+        legend.position = "none"
+  )
+```
+
+```{r, include=F}
+ggsave("tidytuesday_2021_w34.png", width = 12.5, height = 12, device = agg_png, dpi = 640)
+```
+
+```{r, echo=F, out.width='100%'}
+knitr::include_graphics("tidytuesday_2021_w34.png")
+```
+
+<div style="margin-top: 20px;text-align:center;font-weight:bold; font-size : 2.5rem !important;">Et voilà!</div>
+

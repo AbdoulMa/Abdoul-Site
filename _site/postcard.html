@@ -621,6 +621,13 @@
           <!--/radix_placeholder_navigation_in_header-->
           <!--radix_placeholder_site_in_header-->
           <style type="text/css">
+          /* Import custom fonts from Google */ 
+
+          /* Import fonts from Google's API */
+          @import url('https://fonts.googleapis.com/css2?family=Lato');
+          @import url('https://fonts.googleapis.com/css2?family=Fira+Mono');
+
+
           .distill-site-nav {
             /*color: #C0C0C0; */
             background-color: #2A363BFF; 
@@ -646,11 +653,6 @@
             color: color: #383838;
           }
 
-          /* Import custom fonts from Google */ 
-
-          /* Import fonts from Google's API */
-          @import url('https://fonts.googleapis.com/css2?family=Lato');
-          @import url('https://fonts.googleapis.com/css2?family=Fira+Mono');
 
           /* Use those fonts throughout */
 
@@ -690,19 +692,57 @@
 
           d-article div.sourceCode pre { /* Chunk code */
             border-radius: 5px; /* Rounded edges */
-            background-color: #fff;
-            color: black;
+            background-color: #272822;
+            color: #f8f8f2;
             padding: 5px 5px 5px 18px;
-          }
-          /* Change the appearance of in-line code chunks */
-          code {
-            font-family: 'Fira Mono', sans-serif;
-            color: #383838;
-            background: transparent;
-            font-weight: 400;
-            font-size: 0.9em;
+            display: block !important;
+            border: 0 !important;
+            overflow: auto !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
           }
 
+          /* Change the appearance of in-line code chunks */
+          code {
+            font-family: 'IBM Plex Mono', 'Fira Mono' sans-serif !important;
+            background: transparent;
+            font-weight: 400;
+            font-size: 1em;
+            overflow-wrap: break-word !important;
+          }
+
+
+          code span.fu {
+              color: #a6e22e;
+          }
+
+          code span.va {
+              color: #ffffff;
+          }
+
+          code span.op {
+              color: #f92672;
+          }
+
+          code span.st {
+            color : #e6db74;
+          }
+
+          code span.fl {
+              color: #ae81ff;
+          }
+
+          d-article li {
+              margin-bottom: 0px !important;
+          }
+
+          /* Tables knitted with kable */
+          /*d-article table {
+              width: 100%;
+              overflow: auto;
+              display: block;
+          }
+          */
           </style>
           <!--/radix_placeholder_site_in_header-->
           

@@ -2041,6 +2041,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
   <style type="text/css">
+  /* Import custom fonts from Google */ 
+
+  /* Import fonts from Google's API */
+  @import url('https://fonts.googleapis.com/css2?family=Lato');
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono');
+
+
   .distill-site-nav {
     /*color: #C0C0C0; */
     background-color: #2A363BFF; 
@@ -2066,11 +2073,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     color: color: #383838;
   }
 
-  /* Import custom fonts from Google */ 
-
-  /* Import fonts from Google's API */
-  @import url('https://fonts.googleapis.com/css2?family=Lato');
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono');
 
   /* Use those fonts throughout */
 
@@ -2110,19 +2112,57 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   d-article div.sourceCode pre { /* Chunk code */
     border-radius: 5px; /* Rounded edges */
-    background-color: #fff;
-    color: black;
+    background-color: #272822;
+    color: #f8f8f2;
     padding: 5px 5px 5px 18px;
-  }
-  /* Change the appearance of in-line code chunks */
-  code {
-    font-family: 'Fira Mono', sans-serif;
-    color: #383838;
-    background: transparent;
-    font-weight: 400;
-    font-size: 0.9em;
+    display: block !important;
+    border: 0 !important;
+    overflow: auto !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
+  /* Change the appearance of in-line code chunks */
+  code {
+    font-family: 'IBM Plex Mono', 'Fira Mono' sans-serif !important;
+    background: transparent;
+    font-weight: 400;
+    font-size: 1em;
+    overflow-wrap: break-word !important;
+  }
+
+
+  code span.fu {
+      color: #a6e22e;
+  }
+
+  code span.va {
+      color: #ffffff;
+  }
+
+  code span.op {
+      color: #f92672;
+  }
+
+  code span.st {
+    color : #e6db74;
+  }
+
+  code span.fl {
+      color: #ae81ff;
+  }
+
+  d-article li {
+      margin-bottom: 0px !important;
+  }
+
+  /* Tables knitted with kable */
+  /*d-article table {
+      width: 100%;
+      overflow: auto;
+      display: block;
+  }
+  */
   </style>
   <!--/radix_placeholder_site_in_header-->
 
@@ -2298,6 +2338,27 @@ function init_posts_list() {
 <div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <h1 class="posts-list-caption" data-caption="Abdoul Blog">Abdoul Blog</h1>
+<a href="posts/2021-08-17-treemap/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["R","Tidyverse","Tree Map"]}</script>
+<div class="metadata">
+<div class="publishedDate">Aug. 16, 2021</div>
+<div class="dt-authors">
+<div class="dt-author">Abdoul ISSA BIDA</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2021-08-17-treemap/preview.png"/>
+</div>
+<div class="description">
+<h2>Tired of Pie Charts !? Let's make a Tree Map.</h2>
+<div class="dt-tags">
+<div class="dt-tag">R</div>
+<div class="dt-tag">Tidyverse</div>
+<div class="dt-tag">Tree Map</div>
+</div>
+<p>Tree maps are useful alternatives for the presentation of proportions.</p>
+</div>
+</a>
 <a href="posts/welcome/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":["R","Python"]}</script>
 <div class="metadata">
@@ -2325,7 +2386,7 @@ function init_posts_list() {
 <ul>
 <li>
 <a href="#category:Articles">Articles</a>
-<span class="category-count">(1)</span>
+<span class="category-count">(2)</span>
 </li>
 <li>
 <a href="#category:Python">Python</a>
@@ -2333,6 +2394,14 @@ function init_posts_list() {
 </li>
 <li>
 <a href="#category:R">R</a>
+<span class="category-count">(2)</span>
+</li>
+<li>
+<a href="#category:Tidyverse">Tidyverse</a>
+<span class="category-count">(1)</span>
+</li>
+<li>
+<a href="#category:Tree_Map">Tree Map</a>
 <span class="category-count">(1)</span>
 </li>
 </ul>
