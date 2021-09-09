@@ -2077,13 +2077,19 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Import fonts from Google's API */
 @import url('https://fonts.googleapis.com/css2?family=Lato');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Mono');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
 
 
 .distill-site-nav {
-  /*color: #C0C0C0; */
-  background-color: #2A363BFF; 
+  background-color: #050708FF; 
   font-size: 20px;
   font-weight: 900;
+  font-family: 'Lato Black';
+}
+
+.posts-sidebar, .dt-tags {
+    font-family: 'Lato';
 }
 
 body {
@@ -2104,28 +2110,32 @@ h1, h2, h3, h4, h5 {
   color: color: #383838;
 }
 
+d-article h2 { 
+  font-size : 24px;
+}
 
 /* Use those fonts throughout */
 
 /* Use specific font in the body of the text */
 html, body, p {
   
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
+  font-family: 'Source Serif Pro', sans-serif;
+  font-weight: 550;
   line-height: 1.25; 
   font-size: 1.1rem;
   color:  #000000;
   font-style: normal;
+  text-align: justify;
   
 }
 /* Links in article*/
-d-article p a{
+d-article p a {
 color : #E84A5FFF ;
 font-weight: 600;
 border-style: none;
 }
 
-d-article p a:hover { 
+d-article p a:hover{ 
   border-bottom-color: #E84A5FFF !important;
   border-bottom-width: 2px !important;
 }
@@ -2144,6 +2154,7 @@ d-article pre { /* Chunk output */
 d-article div.sourceCode pre { /* Chunk code */
   border-radius: 5px; /* Rounded edges */
   background-color: #272822;
+  font-family: 'Ubuntu Mono', 'Fira Mono' sans-serif !important;
   color: #f8f8f2;
   padding: 5px 5px 5px 18px;
   display: block !important;
@@ -2154,8 +2165,8 @@ d-article div.sourceCode pre { /* Chunk code */
 }
 
 /* Change the appearance of in-line code chunks */
-code {
-  font-family: 'IBM Plex Mono', 'Fira Mono' sans-serif !important;
+d-article div.sourceCode code {
+  font-family: 'Ubuntu Mono', 'Fira Mono' sans-serif !important;
   background: transparent;
   font-weight: 400;
   font-size: 1em;

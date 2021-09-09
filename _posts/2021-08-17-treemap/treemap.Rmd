@@ -182,7 +182,7 @@ Now, we extend it.
 
 ```{r, fig.align='center', out.width='100%'}
 extended_palette <- colorRampPalette(paletteer_d("rcartocolor::Prism",12)) 
-# Let's visualize 40 interpolated colors et
+# Let's visualize 49 interpolated colors et
 extended_palette(49) %>% 
   scales::show_col(cex_label = .55, ncol = 7)
 ```
