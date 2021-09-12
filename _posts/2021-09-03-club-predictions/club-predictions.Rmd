@@ -1,7 +1,7 @@
 ---
 title: "Club Predictions"
 description: |
-  Scraping of european clubs predictions and visualization of championship winning           probabilities.
+  Scraping of european clubs predictions and visualization of championship winning probabilities.
 author:
   - name: Abdoul ISSA BIDA
     url: {}
@@ -21,7 +21,6 @@ bibliography: ../articles.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = T)
-# TODO Set data GH link 
 library(rvest)     
 library(xml2)
 library(tidyverse)
@@ -38,32 +37,34 @@ For this one, we will cover together two of my favorite disciplines, one in Comp
 
 Don't be disappointed `r emo::ji('smile')`, if you are there only for the final dataviz, you can skip to the next section. I tried to make it as much as clear and simple that I can.
 
-# Scraping 
+# Scraping
 
-So, what website we are going to scrape ? 
+So, what website we are going to scrape ?
 
-It will be [FiveThirtyEight](https://projects.fivethirtyeight.com). They provide data behind some of their articles and charts, including data for Soccer Clubs Predictions. 
+It will be [FiveThirtyEight](https://projects.fivethirtyeight.com). They provide data behind some of their articles and charts, including data for Soccer Clubs Predictions.
 
-Unfortunately, the data you can retrieve only  cover for [Club Soccer Predictions](https://projects.fivethirtyeight.com/soccer-predictions/) and [Global Club Soccer Rankings](https://projects.fivethirtyeight.com/global-club-soccer-rankings/). But for our today tutorial, based mostly  on determining which league club will qualify for UCL^[UEFA Champions League] or which will win the national league. 
+Unfortunately, the data you can retrieve only cover [Club Soccer Predictions](https://projects.fivethirtyeight.com/soccer-predictions/) and [Global Club Soccer Rankings](https://projects.fivethirtyeight.com/global-club-soccer-rankings/). But our today tutorial data, is based on determining which league club will qualify for UCL[^1] or which will win the national league.
 
-So, we will scrape it directly, from the league page. For example, to scrape, the probabilities that each club of: 
+[^1]: UEFA Champions League
 
-- French Ligue 1, we will scrape it from [https://projects.fivethirtyeight.com/soccer-predictions/ligue-1/]()
-- German Bundesliga, we will scrape it from [https://projects.fivethirtyeight.com/soccer-predictions/bundesliga/]() 
-- English Premier League, we will scrape it from [https://projects.fivethirtyeight.com/soccer-predictions/premier-league/]()
-- and so on. 
+So, we will scrape it directly, from the league page. For example, to scrape, the probabilities for each club of:
 
-Here is an example of how, the data is presented on their website. 
+-   French Ligue 1, we will scrape it from [https://projects.fivethirtyeight.com/soccer-predictions/ligue-1/]()
+-   German Bundesliga, we will scrape it from [https://projects.fivethirtyeight.com/soccer-predictions/bundesliga/]()
+-   English Premier League, we will scrape it from [https://projects.fivethirtyeight.com/soccer-predictions/premier-league/]()
+-   and so on.
+
+Here is an example of how, the data is presented on their website.
 
 ```{r site_presentation, echo = F}
 knitr::include_url(url = "https://projects.fivethirtyeight.com/soccer-predictions/premier-league/", height = 450)
 ```
 
-The data is updated daily, what is very interesting because, with some tricky automation, we can follow the evolution of the odds of the clubs  to win a season along. But, that is not the subject of this blog post.
+The data is updated daily, what is very interesting because, with some tricky automation, we can follow the evolution of the odds of the clubs to win a season along. But, that is not the subject of this blog post.
 
-## Website Page Reading 
+## Website Page Reading
 
-For the scraping, we need a couple libraries, in particular: 
+For the scraping, we need a couple libraries, in particular:
 
 ```{r load_scrap_library, eval = F}
 library(tidyverse) # For data wrangling, ggplot2 and friends
@@ -71,7 +72,7 @@ library(rvest) # for the scraping
 library(janitor) # for the function row_to_names
 ```
 
-So, let's start our scraping workflow : 
+So, let's start our scraping workflow :
 
 ```{r scrap_forecast_tab}
 league_link <- "https://projects.fivethirtyeight.com/soccer-predictions/premier-league/"
@@ -81,33 +82,34 @@ clubs_rows <- league_link %>%
   html_elements("tbody .team-row") # Retrieve each row of the table
 ```
 
-Let's me explain a little bit the code. 
+Let's me explain a little bit the code.
 
-Firstly,  I retrieve the complete page.
+Firstly, I retrieve the complete page.
 
 ```{r, eval = F}
 league_link %>% 
   read_html()
 ```
 
-Secondly, I retrieve the forecasting table, with the function `html_element()`. So, where `#forecast-table` comes from? 
+Secondly, I retrieve the forecasting table, with the function `html_element()`. So, where `#forecast-table` comes from?
 
-To be a good, web scraper, you must be a good website  inspector. Web developers, create websites with logic, and in order to retrieve data from those website pages, we have to make to make us their logic. 
+To be a good web scraper, you must be a good website inspector. Web developers, create websites with logic, and in order to retrieve data from those website pages, we have to make to make us their logic.
 
-To find out how to access the forecast table, you must go to the page we are scraping ([here](https://projects.fivethirtyeight.com/soccer-predictions/premier-league/)). `Right-click` on the table we want to retrieve, and then click `inspect`. The browser will open the `inspector`. 
+To find out how to access the forecast table, you must go to the page we are scraping ([here](https://projects.fivethirtyeight.com/soccer-predictions/premier-league/)). `Right-click` on the table we want to retrieve, and then click `inspect`. The browser will open the `inspector`.
 
 ```{r inspector, echo=F, out.width='100%', fig.cap='Inspector Interface'}
 knitr::include_graphics("inspector.png", dpi = 640)
 ```
 
 <aside>
+
 I use Mozilla Firefox as my browser, you will probably need another process depending on your browser. Google it, if you don't know how to do it.
+
 </aside>
 
-Next, you need a little  attention to notice that the table has as `id` `forecast-table`. It also has as `class` `forecast-table`. But, we will use the `id` to access the table. 
+Next, you need a little attention to notice that the table has as `id` `forecast-table`. It also has as `class` `forecast-table`. But, we will use the `id` to access the table.
 
-For this,  we use the `html_element()` function of the `rvest`[@rvest] package.
-When we select the table by its `id`, we prefix the `id` with `#` in our `html_element()` function. 
+For this, we use the `html_element()` function of the `rvest`[@rvest] package. When we select the table by its `id`, we prefix the `id` with `#` in our `html_element()` function.
 
 In the same way, we collect each club row with:
 
@@ -116,9 +118,9 @@ In the same way, we collect each club row with:
 html_elements("tbody .team-row")
 ```
 
-Note that we are using, `html_elements()` instead of `html_element()`, which selects all the elements (and not just the first one) our forecast table.
+Note that we are using, `html_elements()` instead of `html_element()`, which selects all the elements (and not just the first one) of our forecast table.
 
-Let's see what the list of results looks like. 
+Let's see what the list of results looks like.
 
 ```{r clubs_list}
 clubs_rows
@@ -126,12 +128,11 @@ clubs_rows
 
 Well, we have all, the premier league clubs.
 
-## Clubs names and logos 
+## Clubs names and logos
 
-The next step in my workflow is to select for each club, its name and logo link. 
-You should be wondering, why  I am not selecting the probabilities I was talking at the beginning. Please be patient, this will be the subject of our next section.
+The next step in my workflow is to select for each club, its name and logo link. You should be wondering, why I am not selecting the probabilities I was talking at the beginning. Please be patient, this will be the subject of our next section.
 
-Let's get the name and the logo for one club, and then generalize for all. 
+Let's get the name and the logo for one club, and then generalize for all.
 
 ```{r individual_name_logo_selection}
 # Let's select the first node 
@@ -153,15 +154,15 @@ node <- pluck(clubs_rows, 1)
 
 Let's see if everything is what it supposed to.
 
-
 ```{r}
 print(team_name)
 ```
+
 ```{r}
 print(team_logo)
 ```
 
-It is perfect, we can  recorver from a node, the club name and its logo. Let us generalize to all the clubs with a function. 
+It is perfect, we can retrieve from a node, the club name and its logo. Let us generalize to all the clubs with a function.
 
 ```{r generalized_names_logos_selection}
 extract_name_logo <- function(node) { 
@@ -175,7 +176,7 @@ extract_name_logo <- function(node) {
   team_logo <- node %>% 
     # Select the img element which contains team logo
     html_element(".logo img") %>% 
-    # Retrieve the the src attribute
+    # Retrieve the src attribute
     html_attr("src") %>% 
     str_remove("&w=56")
   # Return it like a tibble
@@ -186,13 +187,12 @@ extract_name_logo <- function(node) {
 }
 ```
 
-Thanks to the `purrr`  library, we can now retrieve all  clubs names and logos. 
+Thanks to the `purrr` library, we can now retrieve all clubs names and logos.
 
 ```{r}
 clubs_names_logos <- clubs_rows %>% 
    map_df(extract_name_logo)
 ```
-
 
 ```{r , echo=F, fig.align='center'}
   clubs_names_logos %>% 
@@ -200,10 +200,9 @@ clubs_names_logos <- clubs_rows %>%
   kable_styling(position = "center")
 ```
 
-## Retrieve the forecast table 
+## Retrieve the forecast table
 
-In this section, we will use another function from  `rvest` package : `html_table()`. 
-This function mimics what what  a browser does, but repeats the values of merged cells in every cell that cover. 
+In this section, we will use another function from `rvest` package : `html_table()`. This function mimics what what a browser does, but repeats the values of merged cells in every cell that cover.
 
 ```{r clubs_predictions_table}
 clubs_predictions <- league_link %>% 
@@ -212,19 +211,23 @@ clubs_predictions <- league_link %>%
   # Don't keep the header 
   html_table(header = F) %>% 
   # Remove extra headers that we don't need
-  # And make 
+  # And make the third row the columns names 
   janitor::row_to_names(row_number = 3) %>%
   # Remove extra columns that we don't need
   select(1:10) %>% 
-  # Separate team name  team point 
-  # they are seperated by a tag in the hmtl 
-  # and collapsed if retrieved by html_page 
-  tidyr::extract(col = team, into = c('team_name','team_point'), regex = "(.+)(\\d+\\spts?)") 
+  mutate(
+  # Delete the points in the name
+    # Example: Man City8pts becomes Man City
+    team_name = str_remove(team ,pattern ="\\d+\\spts?") 
+   ) %>% 
+  relocate(team_name) %>% 
+    select(-team)
+
 ```
 
-I know it can be a little bit complex for a beginner (6 months ago I was too). But nothing exceptional, if you understand the logic behind each function. 
+I know it can be a little bit complex for a beginner (6 months ago I was too). But nothing exceptional, if you understand the logic behind each function.
 
-What the data looks like at this stage? 
+What the data looks like at this stage?
 
 ```{r,  echo= F}
 clubs_predictions %>% 
@@ -232,7 +235,7 @@ clubs_predictions %>%
   kable_styling(position = "center")
 ```
 
-Let's clean the data a bit more the data to  make it fit what we want to do. 
+Let's clean the data a bit more to make it fit what we want to do.
 
 ```{r predictions_data_cleaning}
 clubs_predictions <- clubs_predictions %>%
@@ -245,7 +248,7 @@ clubs_predictions <- clubs_predictions %>%
          proj_pts = "proj. pts.pts.",
          qualify_ucl = "qualify for UCLmake UCL"
   ) %>%
-  # Delete column with space
+  # Delete columns with space in their names 
   select(-contains(" "))
 
 # When probability <1%, give  it 0
@@ -254,37 +257,38 @@ clubs_predictions <- clubs_predictions %>%
   mutate(across(.cols = c("relegatedrel.", "qualify_ucl", "win_league"), .fns = ~ parse_number(.)))
 ```
 
-Finally, let's join the `clubs predictions dataframe` with `names and logos dataframe` previously scraped.  
+Finally, let's join the `clubs predictions dataframe` with `names and logos dataframe` previously scraped.
 
 ```{r predictions_data_join}
 clubs_predictions <- clubs_predictions %>%
   left_join(clubs_names_logos)
 ```
-<div style ="width:100%; display:block; overflow:auto;">
 
+<div style="width:100%; display:block; overflow:auto;">
 ```{r echo=F}
 clubs_predictions %>% 
   head(5) %>% 
   kable(format = 'html', caption = "Clubs Predictions and Teams Informations") %>% 
   kable_styling(position = 'center')
-
-write_csv(clubs_predictions,"epl_clubs_predictions.csv")
 ```
+
 </div>
 
+```{r ,include=F}
+write_csv(clubs_predictions,"epl_clubs_predictions.csv")
+```
 
-# Data Visualization 
 
-Well, we had our data, tidy as we wanted. Now let's visualize it. 
-If you skip the scraping workflow, you can download the data for this section <a href="https://raw.githubusercontent.com/AbdoulMa/Abdoul-Site/master/_posts/2021-09-03-club-predictions/epl_clubs_predictions.csv" target="_blank" download>Here</a>.
 
-We are going to visualize it as a facet of a waffle plot for each team. 
-Since the probabilities are represented as percentage, we are going to make a waffle of 100 squares.
-Each represents a chance for a club to win the league, to qualify for UEFA Champions League or both. 
+# Data Visualization
 
-However, to fill the square according to each category of probability, it is necessary to wrangle the data a little bit more, in particular to bring together in a single column the three categories we want to highlight. 
+Well, we had our data, tidy as we wanted. Now let's visualize it. If you skip the scraping workflow, you can download the data for this section <a href="https://raw.githubusercontent.com/AbdoulMa/Abdoul-Site/master/_posts/2021-09-03-club-predictions/epl_clubs_predictions.csv" target="_blank" download>Here</a>.
 
-So what do I do? 
+We are going to visualize it as a facet of a waffle plot for each team. Since the probabilities are represented as percentage, we are going to make a waffle of 100 squares. Each represents a chance for a club to win the league, to qualify for UEFA Champions League or both.
+
+However, to fill the square according to each category of probability, it is necessary to wrangle the data a little bit more, in particular to bring together in a single column the three categories we want to highlight.
+
+So what do I do?
 
 ```{r}
 predictions_waffle_df <- clubs_predictions %>% 
@@ -297,24 +301,24 @@ predictions_waffle_df <- clubs_predictions %>%
   )
 ```
 
-First, I create  two new columns: 
+First, I create two new columns:
 
-- `ucl_qualif_diff`  which represents the probability that a club qualifies to UEFA Champions League 
-- `remaining` which represents the probability that a club won't win the league and won't qualify for the UEFA Champions League. 
+-   `ucl_qualif_diff` which represents the probability that a club qualifies to UEFA Champions League
+-   `remaining` which represents the probability that a club won't win the league and won't qualify for the UEFA Champions League.
 
-And Finally, i am grouping my three categories into a single column `win_cat` and their values in the  `win_value` column.
+And finally, i am grouping my three categories into a single column `win_cat` and their values in the `win_value` column.
 
-So let's finally make the waffle. 
+So let's finally make the waffle.
 
-We will be using [`waffle`](https://github.com/hrbrmstr/waffle) package by Bob Rudis, which is clearly one of my favorites. 
+We will be using [`waffle`](https://github.com/hrbrmstr/waffle) package by Bob Rudis, which is clearly one of my favorites.
 
-Unfortunately, the package  is not available on CRAN, so let's install it with devtools: 
+Unfortunately, the package is not available on CRAN, so let's install it with devtools:
 
 ```{r install_waffle, eval=F}
 devtools::install_github("hrbrmstr/waffle")
 ```
 
-We will need a few more package to polish our visualization: 
+We will need a few more packages to polish our visualization:
 
 ```{r load_libraries, eval = F}
 library(waffle)
@@ -322,7 +326,7 @@ library(ggtext) # For customize the text
 library(ragg) # For the device  to save the plot
 ```
 
-To draw club logo images, let's define a special function: 
+To draw club logo images, let's define a special function:
 
 ```{r logo_image}
 # The function takes 2 parameters 
@@ -336,7 +340,6 @@ link_to_img <- function(x, width = 30) {
 ```
 
 Finally let's implement our visualization.
-
 
 ```{r data_visualisation}
 plot <- predictions_waffle_df %>% 
@@ -359,6 +362,7 @@ plot <- predictions_waffle_df %>%
         "remaining" = "No chance"
       )
   ) +
+  labs(title = "English Premier League Clubs Predictions") +
   coord_equal(expand = F) + 
   theme_minimal(base_family = "Chivo") +
   theme(
@@ -366,21 +370,19 @@ plot <- predictions_waffle_df %>%
     panel.border = element_rect(color = "black", size = 1.1, fill = NA),
     legend.position = "top",
     plot.margin = margin( b = 1, unit = "cm"),
+    plot.title = element_text(size = rel(2), margin = margin(t = 20, b= 20)),
         axis.text = element_blank(),
         strip.text = element_markdown())
 ```
 
-
 ```{r, include=F}
-ggsave("club_predictions.png", plot = plot, width = 9, height = 9.5, device = ragg::agg_png, dpi = 640) 
+ggsave("club_predictions.png", plot = plot, width = 9, height = 10, device = ragg::agg_png, dpi = 640) 
 ```
-
 
 ```{r, echo=F}
 knitr::include_graphics(path = "club_predictions.png")
 ```
 
 <div style="margin-top: 20px;text-align:center;font-weight:bold; font-size : 2.5rem !important;">Et voilà!</div>
-
 
 
