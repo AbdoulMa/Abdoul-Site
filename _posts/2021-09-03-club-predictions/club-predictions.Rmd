@@ -346,7 +346,7 @@ plot <- predictions_waffle_df %>%
   mutate( team_name = fct_reorder(paste0(link_to_img(team_logo),'<br>',team_name), -qualify_ucl), 
     win_cat = fct_relevel(win_cat, c("win_league", "ucl_qualif_diff","remaining"))) %>% 
   ggplot(aes(fill = win_cat, values = win_value)) + 
-  geom_waffle(color = "white", size = .15, n_rows = 10, flip = T) + 
+  geom_waffle(color = "#111111", size = .15, n_rows = 10, flip = T) + 
   facet_wrap(vars(team_name)) + 
   scale_fill_manual(
     name = NULL,
