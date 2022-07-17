@@ -1,0 +1,165 @@
+---
+title: "Abdoul ISSA BIDA resume"
+author: Abdoul ISSA BIDA
+date: "`r Sys.Date()`"
+params:
+  pdf_mode:
+    value: false
+output:
+  pagedown::html_resume:
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: true # Notamment pour générer un fichier temporaire avant rendu pdf
+    css: 
+      - resume.css # OVERRIDE CERTAINS FUNCTION OF CSS
+      - resume # DEFAULT FILE
+# uncomment this line to produce HTML and PDF in RStudio:
+  knit: pagedown::chrome_print
+# https://livefreeordichotomize.com/2019/09/04/building_a_data_driven_cv_with_r/
+  # pagedown::chrome_print("Resume/resume.Rmd", "Resume/resume.pdf", format = "pdf")
+---
+
+
+```{r resume-setup, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+library(tidyverse)
+library(glue)
+
+
+# googledrive::drive_auth( email = "issamadjid1995@gmail.com")
+googlesheets4::gs4_auth(token = googledrive::drive_token())
+
+googlesheet_link <- "https://docs.google.com/spreadsheets/d/1bw-nIResQVytGpZMd1x5jOgjLqS-LV6TOk628YJVJbE/edit#gid=0"
+
+ read_gsheet <- function(sheet_id){
+      googlesheets4::read_sheet(googlesheet_link, sheet = sheet_id, skip = 1, col_types = "c")
+}
+ 
+entries_data  <- read_gsheet(sheet_id = "entries")
+skills        <- read_gsheet(sheet_id = "language_skills")
+text_blocks   <- read_gsheet(sheet_id = "text_blocks")
+contact_info  <- read_gsheet(sheet_id = "contact_info")
+
+```
+
+Aside
+================================================================================
+
+![Lijia Yu](https://avatars1.githubusercontent.com/u/895125?s=400&v=4){width=80%}
+
+Contact Info {#contact}
+--------------------------------------------------------------------------------
+
+```{r contact_block}
+contact_info <- contact_info %>% 
+  mutate(fancy_line = case_when(loc %in% c('twitter','github','website') ~ glue('[{contact}]({link})'), 
+                              TRUE ~ contact),
+         fancy_line = glue('- <i class="fa fa-{icon}"></i> {fancy_line}'))
+
+contact_info %>% 
+  select(fancy_line) %>% 
+  map_chr(~paste0(.,  collapse = "\n")) %>% 
+  cat()
+
+if(params$pdf_mode){
+  cat("\n View this CV online with links at https://abdoulblog.netlify.app/resume")
+} else {
+  cat(" <i class='fas fa-download'></i> <a href='https://github.com/AbdoulMa/Abdoul-Site/raw/master/abdoul_cv.pdf' download>
+      Download a PDF of this CV
+      </a>")
+}
+```
+- For more information, please contact me via email.
+
+Language Skills {#skills}
+--------------------------------------------------------------------------------
+```{r languages_skills}
+print_langage_skills <- function(skill, level) { 
+  glue('<div style = "color : black;width : 100%;"><span style = "font-weight : bold;float : left;">{skill}</span> <span style = "float :right;">{level}/5</span></div><br>')
+}
+skills %>% 
+  arrange(desc(level)) %>% 
+  pmap_chr(print_langage_skills) %>% 
+  str_c(collapse = "\n") %>% 
+  cat()
+```
+
+```{r other_skills}
+# text_blocks %>% 
+#   filter(loc != "intro") %>% 
+#   pull(text) %>% 
+#   map(~glue("- {.}")) %>% 
+#   str_c(collapse = "\n") %>% 
+#   cat()
+```
+
+<!-- Disclaimer {#disclaimer} -->
+<!-- -------------------------------------------------------------------------------- -->
+<!-- This resume was made with the R package [**pagedown**](https://github.com/rstudio/pagedown). -->
+
+*Last updated on `r Sys.Date()`.*
+
+
+Main
+================================================================================
+
+Abdoul ISSA BIDA {#title}
+--------------------------------------------------------------------------------
+
+### Currently fullstack Developer at Actualis
+
+```{r intro}
+text_blocks %>% 
+  filter(loc == "intro") %>% 
+  pull(text)  %>% 
+  cat()
+```
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r educations}
+print_education <- function(title, loc, institution, start, end, description_1) {
+  res <- glue('### {institution}\n\n\n')
+  res <- paste0(res, glue("{title}\n\n\n"))             
+  res <- paste0(res, glue("{loc}\n\n\n"))             
+  res <- paste0(res, glue("{end} - {start}\n\n\n"))             
+  res <- paste0(res, glue("{description_1}\n\n\n"))             
+  cat(res)
+}
+
+entries_data %>%
+  filter(section == "education") %>%
+  select(title, loc, institution, start, end, description_1)%>%
+  pwalk(print_education) 
+```
+  
+
+Professional Experience {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r positions}
+print_positions <- function(title, loc, institution, start, end, description_1, description_2, description_3) {
+  res <- glue('### {institution}\n\n\n')
+  res <- paste0(res, glue("{title}\n\n\n"))             
+  res <- paste0(res, glue("{loc}\n\n\n"))             
+  res <- paste0(res, glue("{ifelse(is.na(end), '',end)} - {start}\n\n\n"))             
+  res <- paste0(res, glue("::: concise \n\n"))             
+  res <- paste0(res, glue("- {description_1}\n\n"))             
+  res <- paste0(res, glue("- {description_2}\n\n"))             
+  res <- paste0(res, glue("- {description_3}\n\n"))             
+  res <- paste0(res, glue(":::\n\n\n"))             
+  cat(res)
+}
+
+entries_data %>%
+  filter(section == "industry_positions") %>%
+  select(title, loc, institution, start, end, description_1,description_2, description_3)%>%
+  pwalk(print_positions) 
+```
+
+
+

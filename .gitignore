@@ -5,3 +5,5 @@
 .Rdata
 .httr-oauth
 .DS_Store
+resume/*
+!resume/resume.html
